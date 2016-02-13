@@ -8,18 +8,21 @@ Let's load a list of airport data from https://github.com/jpatokal/openflights
 ```{r}
 airports <- read.csv("airports.dat", header = FALSE)
 colnames(airports) <- c("ID", "name", "city", "country", "IATA_FAA", "ICAO", "lat", "lon", "altitude", "timezone", "DST", "Region")
-head(airports)
+
 ```
 
 This data set contains airports from all over the world. Let's get only the 
 airports from the United States.
 
 ```{r}
+
 usa_airports <- subset(airports, country == "United States")
-head(airports)
+
+library(DT)
+datatable(usa_airports[,c("name", "city", "country", "IATA_FAA", "lat", "lon", "altitude")])
 ```
 
-Let's plot the location of all of the airports in the USA
+Let's generate a static map containing the location of all of the airports in the USA
 
 ```{r, message=FALSE, warning=FALSE}
 library(ggmap)
@@ -35,6 +38,6 @@ of the United States.
 library(leaflet)
 m <- leaflet(data = usa_airports) %>%
   addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers(~lon, ~lat, popup = ~name)
+  addCircles(~lon, ~lat, popup = ~name)
 m  # Print the map
 ```

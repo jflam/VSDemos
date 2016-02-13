@@ -10,6 +10,7 @@ install.packages("dplyr")
 install.packages("knitr")
 install.packages("rmarkdown")
 install.packages("leaflet")
+install.packages("DT")
 
 suppressPackageStartupMessages(library(googleVis))
 suppressPackageStartupMessages(library(ggmap))
