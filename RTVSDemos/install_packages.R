@@ -20,3 +20,6 @@ install.packages("plotly")
 suppressPackageStartupMessages(library(googleVis))
 suppressPackageStartupMessages(library(ggmap))
 suppressPackageStartupMessages(library(dplyr))
+
+install.packages(c('rzmq', 'repr', 'IRkernel', 'IRdisplay'),
+                 repos = c('http://irkernel.github.io/', getOption('repos')))
