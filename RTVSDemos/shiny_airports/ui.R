@@ -12,6 +12,7 @@ shinyUI(fluidPage(
             # here into the UI
 
             uiOutput("control")
+
         ),
         mainPanel(
 
