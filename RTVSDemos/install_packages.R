@@ -15,6 +15,7 @@ install.packages("rmarkdown")
 install.packages("leaflet")
 install.packages("DT")
 install.packages("shiny")
+install.packages("plotly")
 
 suppressPackageStartupMessages(library(googleVis))
 suppressPackageStartupMessages(library(ggmap))

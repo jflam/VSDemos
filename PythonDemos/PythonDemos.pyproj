@@ -22,6 +22,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="install_packages.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PythonDemos.py" />
   </ItemGroup>
   <PropertyGroup>
