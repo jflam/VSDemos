@@ -8,11 +8,11 @@ shinyUI(fluidPage(
         sidebarPanel(
             helpText("Visualize airports within a country"),
 
-            # The "control" control is generated on the server and inserted
-            # here into the UI
+            # Country selector control is generated on the server 
+            # and sent to client
 
-            uiOutput("control")
-
+            uiOutput("controls"),
+            uiOutput("slider") 
         ),
         mainPanel(
 

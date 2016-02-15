@@ -54,7 +54,7 @@ shinyServer(function(input, output) {
     # We dynamically generate a listbox control for the client that 
     # contains the list of countries sorted alphabetically
 
-    output$control <- renderUI({
+    output$controls <- renderUI({
         selectInput("country",
             label = "Select a country",
             choices = countries, 
@@ -62,13 +62,38 @@ shinyServer(function(input, output) {
         )
     })
 
-    # Here, we take the country input parameter as the argument
-    # to filter the list for airports from that country
+    # Dynamically render the slider control based on the minimum and max
+    # departures for the selected country
+
+    output$slider <- renderUI({
+        country_data = subset(airports_with_departures, country == input$country)
+        max_destinations = max(country_data$departures)
+
+        sliderInput("departures", "Filter by departures:",
+                    min = 1, max = max_destinations, value = c(1, max_destinations))
+    })
+
+    # Generate the map based on: a) country selected and b) min and max 
+    # departures in the slider control
 
     output$map <- renderLeaflet({
+
+        # Subset based on country parameter sent from the client
+
         country_data = subset(airports_with_departures, country == input$country)
 
-        leaflet(data = country_data) %>%
+        # Subset based on minimum and maximum departure numbers sent from client
+
+        if (is.null(input$departures)) {
+            airport_data <- country_data
+        } else {
+            min_departures <- input$departures[1]
+            max_departures <- input$departures[2]
+            airport_data <- subset(country_data,
+                departures >= min_departures & departures <= max_departures)
+        }
+
+        leaflet(data = airport_data) %>%
             addTiles() %>%
             addCircleMarkers( ~ lon, ~ lat, popup = ~tooltip, radius = ~radius,
                              stroke = FALSE, fillOpacity = 0.5)
