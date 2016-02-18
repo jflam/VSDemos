@@ -68,7 +68,6 @@ shinyServer(function(input, output) {
     output$slider <- renderUI({
         country_data = subset(airports_with_departures, country == input$country)
         max_destinations = max(country_data$departures)
-
         sliderInput("departures", "Filter by departures:",
                     min = 1, max = max_destinations, value = c(1, max_destinations))
     })
