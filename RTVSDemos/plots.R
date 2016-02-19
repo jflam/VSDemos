@@ -3,7 +3,7 @@
 
 # Data for airports.dat and routes.dat from Open Flights repository: https://github.com/jpatokal/openflights
 
-airports <- read.csv("../data/airports.dat", header = FALSE)
+airports <- read.csv("airports.dat", header = FALSE)
 colnames(airports) <- c("ID", "name", "city", "country", "IATA_FAA", "ICAO", "lat", "lon", "altitude", "timezone", "DST", "Region")
 
 # Now would be a good time to view routes inside Variable Explorer (Shift+Alt+V)
@@ -13,7 +13,7 @@ colnames(airports) <- c("ID", "name", "city", "country", "IATA_FAA", "ICAO", "la
 
 head(airports)
 
-routes <- read.csv("../data/routes.dat", header = FALSE)
+routes <- read.csv("routes.dat", header = FALSE)
 colnames(routes) <- c("airline", "airlineID", "sourceAirport", "sourceAirportID", "destinationAirport", "destinationAirportID", "codeshare", "stops", "equipment")
 
 # Use the plyr library to filter some data. TODO: convert to using dplyr

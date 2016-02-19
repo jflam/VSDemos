@@ -6,7 +6,7 @@ output: html document
 Let's load a list of airport data from https://github.com/jpatokal/openflights
 
 ```{r}
-airports <- read.csv("../data/airports.dat", header = FALSE)
+airports <- read.csv("airports.dat", header = FALSE)
 colnames(airports) <- c("ID", "name", "city", "country", "IATA_FAA", "ICAO", "lat", "lon", "altitude", "timezone", "DST", "Region")
 
 ```

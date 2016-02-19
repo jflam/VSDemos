@@ -5,7 +5,7 @@ library(plyr)
 # This code runs exactly once. So we initialize some global variables
 # in our server to hold the airports data.
 
-airports <- read.csv("../../data/airports.dat", header = FALSE)
+airports <- read.csv("../airports.dat", header = FALSE)
 colnames(airports) <- c("ID", "name", "city", "country", "IATA_FAA", 
                         "ICAO", "lat", "lon", "altitude", "timezone", 
                         "DST", "Region")
@@ -18,7 +18,7 @@ countries <- sort(unlist(lapply(unique(airports$country), as.character)))
 # Read data from routes.dat, that contains flight routes for all
 # airports. We will use this data to identify busy airports.
 
-routes <- read.csv("../../data/routes.dat", header = FALSE)
+routes <- read.csv("../routes.dat", header = FALSE)
 colnames(routes) <- c("airline", "airlineID", "sourceAirport", 
                       "sourceAirportID", "destinationAirport", 
                       "destinationAirportID", "codeshare", "stops", 
