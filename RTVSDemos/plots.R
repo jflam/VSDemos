@@ -3,7 +3,7 @@
 
 # Data for airports.dat and routes.dat from Open Flights repository: https://github.com/jpatokal/openflights
 
-airports <- read.csv("airports.dat", header = FALSE)
+airports <- read.csv("airports.dat", header = FALSE, stringsAsFactors = FALSE)
 colnames(airports) <- c("ID", "name", "city", "country", "IATA_FAA", "ICAO", "lat", "lon", "altitude", "timezone", "DST", "Region")
 
 # Now would be a good time to view routes inside Variable Explorer (Shift+Alt+V)
@@ -13,7 +13,7 @@ colnames(airports) <- c("ID", "name", "city", "country", "IATA_FAA", "ICAO", "la
 
 head(airports)
 
-routes <- read.csv("routes.dat", header = FALSE)
+routes <- read.csv("routes.dat", header = FALSE, stringsAsFactors = FALSE)
 colnames(routes) <- c("airline", "airlineID", "sourceAirport", "sourceAirportID", "destinationAirport", "destinationAirportID", "codeshare", "stops", "equipment")
 
 # Use the plyr library to filter some data. TODO: convert to using dplyr
@@ -57,9 +57,9 @@ airports_with_departures$LatLong <- paste(airports_with_departures$lat, airports
 
 airports_with_departures$tooltip <- sprintf("%s (%s)", airports_with_departures$name, airports_with_departures$IATA_FAA)
 
-# Filter out airports with < 100 departures
+# Filter out airports with < 50 departures
 
-airports_with_more_than_50_departures <- filter(airports_with_departures, departures > 50)
+airports_with_more_than_50_departures <- airports_with_departures[airports_with_departures$departures > 50,]
 
 airportMap <- gvisMap(airports_with_more_than_50_departures, "LatLong", "tooltip",
                       options = list(showTip = TRUE,
