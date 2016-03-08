@@ -1,26 +1,29 @@
+# Run this file to install packages in the required_packages
+# list. Will do the right thing if not present.
 
-# Run this file the first time you use this project to ensure
-# that all required R packages are installed on your machine.
+required_packages <- c(
+                     "ggmap",
+                     "plyr",
+                     "googleVis",
+                     "sp",
+                     "dplyr",
+                     "knitr",
+                     "rmarkdown",
+                     "leaflet",
+                     "DT",
+                     "shiny",
+                     "plotly"
+                     )
 
-# TODO: deprecate these packages
+install_package_if_necessary <- function(package) {
+    if (!require(package, character.only = TRUE)) {
+        install.packages(package, dep = TRUE)
+    }
+    suppressPackageStartupMessages(package)
+}
 
-install.packages("ggmap")
-install.packages("plyr")
-install.packages("googleVis")
-install.packages("sp")
+install_required_packages <- function(required_packages) {
+    lapply(required_packages, install_package_if_necessary)
+}
 
-install.packages("dplyr")
-install.packages("knitr")
-install.packages("rmarkdown")
-install.packages("leaflet")
-install.packages("DT")
-install.packages("shiny")
-install.packages("plotly")
-
-suppressPackageStartupMessages(library(googleVis))
-suppressPackageStartupMessages(library(ggmap))
-suppressPackageStartupMessages(library(ggplot2))
-suppressPackageStartupMessages(library(dplyr))
-
-install.packages(c('rzmq', 'repr', 'IRkernel', 'IRdisplay'),
-                 repos = c('http://irkernel.github.io/', getOption('repos')))
+invisible(install_required_packages(required_packages))
